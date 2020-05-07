@@ -1,0 +1,70 @@
+<div class="Cities">
+  <h1>Cities</h1>
+  <div class="mdc-data-table">
+    <table class="mdc-data-table__table" aria-label="Dessert calories">
+      <thead>
+        <tr class="mdc-data-table__header-row">
+          <!--TABLE TITLES BUCLE -->
+          <th *ngFor="let title of options['titles']" class="mdc-data-table__header-cell" role="columnheader"
+            scope="col" (click)="handleSort(title)">
+            <span *ngIf="sortInfo.column == title && sortInfo.order == 'ascent'" class="material-icons">
+              keyboard_arrow_up
+            </span>
+            <span *ngIf="sortInfo.column == title && sortInfo.order == 'descent'" class="material-icons">
+              keyboard_arrow_down
+            </span>
+            {{title}}
+          </th>
+        </tr>
+      </thead>
+      <tbody class="mdc-data-table__content">
+        <tr class="mdc-data-table__row" *ngFor="let city of tableData['content']">
+          <td class="mdc-data-table__cell">{{city.id}}</td>
+          <td class="mdc-data-table__cell">{{city.name}}</td>
+        </tr>
+        <tr class="mdc-data-table__row">
+
+          <!--PAGINATION MENU-->
+          <div class="pagination">
+            <div class="paginator-page-size">
+
+              <!--PAGE SIZE SELECTOR-->
+              <div class="mdc-select mdc-select__menu">
+                <div class="mdc-select__anchor demo-width-class">
+                  <span class="mdc-select__ripple"></span>
+                  <input type="number" class="mdc-select__selected-text" value={{pageSize}}>
+                  <i class=" mdc-select__dropdown-icon"></i>
+                  <span id="demo-label" class="mdc-floating-label mdc-floating-label--float-above">Page Size</span>
+                  <span class="mdc-line-ripple"></span>
+                </div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                  <ul class="mdc-list">
+                    <!--PAGE SIZE SELECTOR OPTIONS-->
+                    <li *ngFor="let size of options['pageSizes']"
+                      [ngClass]="(pageSize==size)?'mdc-list-item':'mdc-list-item mdc-list-item--selected'"
+                      (click)="handlePageSize(size)" data-value={{size}}>
+                      <span class="mdc-list-item__text">
+                        {{size}}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!--PAGE NUMBER INFO-->
+            <p>Page {{pageNumber}} of {{tableData['totalPages']}}</p>
+
+            <!--PAGE NUMBER BUTTONS-->
+            <div class="paginator-page-number">
+              <button (click)=handlePage(0) class="mdc-icon-button material-icons">keyboard_arrow_left</button>
+              <button (click)=handlePage(1) class="mdc-icon-button material-icons">keyboard_arrow_right</button>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>

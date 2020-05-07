@@ -1,0 +1,50 @@
+<!--The header and the side menu are in app-header-->
+<!--The main body with the router-outlet is included inside app-header-->
+<aside class="mdc-drawer mdc-drawer--dismissible">
+  <div class="mdc-drawer__content">
+    <div class="mdc-list">
+      <a
+        *ngFor="let link of links"
+        [ngClass]="
+          path == link.link
+            ? 'mdc-list-item mdc-list-item--activated'
+            : 'mdc-list-item mdc-list-item'
+        "
+        href="{{ link.link }}"
+        aria-current="page"
+      >
+        <span class="mdc-list-item__text">{{ link.name }}</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<div class="mdc-drawer-app-content">
+  <header class="mdc-top-app-bar app-bar" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section
+        class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
+      >
+        <button
+          class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+        >
+          menu
+        </button>
+        <span class="mdc-top-app-bar__title"></span>
+      </section>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+    <div class="mdc-top-app-bar--fixed-adjust">
+      <div class="main">
+        <img
+          class="eurovision_logo"
+          src="assets/img/eurovision.png"
+          alt="Eurovision Services"
+        />
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

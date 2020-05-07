@@ -1,0 +1,40 @@
+.mdc-top-app-bar {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.mdc-icon-button {
+  color: #000000;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.eurovision_logo {
+  height: 100px;
+}
