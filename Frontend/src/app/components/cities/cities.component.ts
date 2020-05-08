@@ -25,18 +25,24 @@ export class CitiesComponent implements OnInit {
 
   getData() {
     // Call the data API
-    this.http
-      .get(
-        `http://192.168.99.100:1111/cities/queryByPage?page=${this.pageNumber}&size=${this.pageSize}`
-      )
-      .subscribe((res) => {
-        this.tableData = res;
-      });
+    var sortParams: string = '';
+    if (this.sortInfo.column && this.sortInfo.order) {
+      sortParams = `&field=${this.sortInfo.column}&sort=${this.sortInfo.order}`;
+    }
+    const host: string = `http://192.168.99.100:1111/cities/queryByPage?page=${
+      this.pageNumber - 1
+    }&size=${this.pageSize}${sortParams}`;
+    const local_host: string = `http://localhost:8080/api/cities/queryByPage?page=${
+      this.pageNumber - 1
+    }&size=${this.pageSize}${sortParams}`;
+    this.http.get(local_host).subscribe((res) => {
+      this.tableData = res;
+      console.log(this.tableData);
+    });
     return;
   }
 
   handleSort(column) {
-    console.log(column);
     // Functionwhen click on th to change the column and sort direction
     if (column !== this.sortInfo['column']) {
       // If column is clicked on the first time always sort on ascent direction.
@@ -63,12 +69,13 @@ export class CitiesComponent implements OnInit {
         order: null,
       };
     }
+    this.getData();
     return;
   }
 
   handlePage(next) {
     // Modify the page number and reload the table data
-    if (next) {
+    if (next && this.pageNumber !== this.tableData['totalPages']) {
       this.pageNumber += 1;
     } else if (this.pageNumber > 1) {
       this.pageNumber -= 1;
