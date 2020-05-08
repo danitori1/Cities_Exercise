@@ -1,7 +1,7 @@
 package com.example.cities_exercise.Controller;
 
-import com.example.cities_exercise.Document.City;
-import com.example.cities_exercise.Repository.CityRepository;
+import com.example.cities_exercise.Document.Cities;
+import com.example.cities_exercise.Repository.CitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/cities")
 @CrossOrigin(value = {})
-public class CityController {
+public class CitiesController {
     @Autowired
-    private CityRepository cityRepository;
+    private CitiesRepository citiesRepository;
 
     @GetMapping(path="")
     public String welcomePage(){
@@ -21,12 +21,12 @@ public class CityController {
     };
 
     @GetMapping(path="/")
-    public Iterable<City> findAll(){
-        return cityRepository.findAll();
+    public Iterable<Cities> findAll(){
+        return citiesRepository.findAll();
     };
 
     @GetMapping(path="/queryByPage")
-    public Page<City> queryByPage(@RequestParam int page, int size, String field, String sort) {
+    public Page<Cities> queryByPage(@RequestParam int page, int size, String field, String sort) {
         PageRequest pageable;
         if (field != null && (sort.equals("ascent"))){
             pageable = PageRequest.of(page, size, Sort.by(field).ascending());
@@ -36,6 +36,6 @@ public class CityController {
             pageable = PageRequest.of(page, size);
         }
 
-        return cityRepository.queryByPage(pageable);
+        return citiesRepository.queryByPage(pageable);
     }
 }
