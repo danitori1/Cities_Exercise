@@ -29,15 +29,16 @@ export class CitiesComponent implements OnInit {
     if (this.sortInfo.column && this.sortInfo.order) {
       sortParams = `&field=${this.sortInfo.column}&sort=${this.sortInfo.order}`;
     }
-    const host: string = `http://192.168.99.100:1111/cities/queryByPage?page=${
-      this.pageNumber - 1
-    }&size=${this.pageSize}${sortParams}`;
-    const local_host: string = `http://localhost:8080/api/cities/queryByPage?page=${
-      this.pageNumber - 1
-    }&size=${this.pageSize}${sortParams}`;
-    this.http.get(local_host).subscribe((res) => {
+
+    // Get the hostname
+    var hostname = location.host;
+
+    const host: string = `${window.location.protocol}//${hostname}:1111/api/cities/queryByPage`;
+    const params = `?page=${this.pageNumber - 1}&size=${
+      this.pageSize
+    }${sortParams}`;
+    this.http.get(host + params).subscribe((res) => {
       this.tableData = res;
-      console.log(this.tableData);
     });
     return;
   }
@@ -91,6 +92,7 @@ export class CitiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getData();
     const dataTable = new MDCDataTable(
       document.querySelector('.mdc-data-table')
     );
@@ -98,6 +100,5 @@ export class CitiesComponent implements OnInit {
     const floatingLabel = new MDCFloatingLabel(
       document.querySelector('.mdc-floating-label')
     );
-    this.getData();
   }
 }

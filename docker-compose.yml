@@ -1,16 +1,36 @@
-version: "3.4"
+version: '3.4'
 services:
-  api:
-    image: moninoeurovisio/exercise-db_api
+  mariadb:
+    image: moninoeurovisio/exercise-db_mariadb
     restart: always
     ports:
-      - "1111:1111"
+      - '3306:3306'
+
+  cities-backend:
+    build: ./Backend
+    container_name: cities-backend
+    restart: always
+    ports:
+      - '1111:1111'
     links:
-      - "mariadb:localhost"
+      - 'mariadb:localhost'
     depends_on:
       - mariadb
 
-  mariadb:
-    image: moninoeurovisio/exercise-db_mariadb
+  cities-frontend:
+    build: ./Frontend
+    container_name: cities-frontend
     ports:
-      - "3306:3306"
+      - '80:80'
+    links:
+      - cities-backend
+    restart: always
+  # cities-backend:
+  #   image: moninoeurovisio/exercise-db_api
+  #   restart: always
+  #   ports:
+  #     - '1111:1111'
+  #   links:
+  #     - 'mariadb:localhost'
+  #   depends_on:
+  #     - mariadb
