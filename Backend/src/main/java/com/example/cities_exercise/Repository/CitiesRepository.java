@@ -6,13 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 @Repository
 public interface CitiesRepository extends CrudRepository<Cities, Integer> {
 
-    @Query(value = "SELECT * FROM cities",
+    @Query(value = "SELECT * FROM cities;",
             nativeQuery = true)
         public Page<Cities> queryByPage(PageRequest pageable);
+
+    @Query(value = "SELECT * FROM cities ORDER BY 'name' ASC LIMIT 30;",
+            nativeQuery = true)
+        public List<Cities> biggestSequence();
 }
