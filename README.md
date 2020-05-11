@@ -13,7 +13,7 @@ This app is made with Angular, Spring Boot, MySQL and Docker
 
 ## START
 
-In the folder, run the command 'docker-compose up' and go to the IP of your Docker container.
+In the folder, run the command 'docker-compose up' and open the IP of your Docker container in the browser.
 
 ## APP
 
