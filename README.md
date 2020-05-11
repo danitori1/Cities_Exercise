@@ -21,4 +21,4 @@ In the folder, run the command 'docker-compose up' and go to the IP of your Dock
 - In cities page (path "/cities") there is a table with options like page size, page number and sort if you click on the headers title.
 - API to check biggest sequence (Exercise a) on city ID in order ascent following N size parameter.
   Go to:
-  "http://(YOUR HOST):1111/api/cities/biggestSequence?N=(SIZE OF THE SEQUENCE)"
+  "http://(YOUR_HOST):1111/api/cities/biggestSequence?N=(SIZE_OF_THE_SEQUENCE)"
