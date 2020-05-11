@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ];
 
   // Path to know which anchor is activated
-  path;
+  path = '';
 
   constructor(location: Location, router: Router) {
     router.events.subscribe((val) => {

@@ -31,9 +31,9 @@ export class CitiesComponent implements OnInit {
     }
 
     // Get the hostname
-    var hostname = location.host;
+    const host: string = `${window.location.protocol}//${location.host}:1111/api/cities/queryByPage`;
 
-    const host: string = `${window.location.protocol}//${hostname}:1111/api/cities/queryByPage`;
+    // Make the request
     const params = `?page=${this.pageNumber - 1}&size=${
       this.pageSize
     }${sortParams}`;
@@ -44,7 +44,7 @@ export class CitiesComponent implements OnInit {
   }
 
   handleSort(column) {
-    // Functionwhen click on th to change the column and sort direction
+    // Function when click on header title to change the column and sort direction
     if (column !== this.sortInfo['column']) {
       // If column is clicked on the first time always sort on ascent direction.
       this.sortInfo = {
@@ -92,6 +92,7 @@ export class CitiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Make the API request and initialize components
     this.getData();
     const dataTable = new MDCDataTable(
       document.querySelector('.mdc-data-table')

@@ -7,6 +7,11 @@
   align-items: center;
 }
 
+.mdc-drawer-app-content {
+  height: 100%;
+  overflow: visible;
+}
+
 th {
   transition: 0.3s;
 }
@@ -18,6 +23,7 @@ th:hover {
 .mdc-data-table {
   width: 80%;
   margin-bottom: 50px;
+  overflow: visible;
 }
 
 .demo-width-class {

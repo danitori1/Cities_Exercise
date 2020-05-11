@@ -1,4 +1,5 @@
 package com.example.cities_exercise.Repository;
+
 import com.example.cities_exercise.Document.Cities;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,17 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 @Repository
 public interface CitiesRepository extends CrudRepository<Cities, Integer> {
 
-    @Query(value = "SELECT * FROM cities;",
-            nativeQuery = true)
-        public Page<Cities> queryByPage(PageRequest pageable);
+    @Query(value = "SELECT * FROM cities", nativeQuery = true)
+    public Page<Cities> queryByPage(PageRequest pageable);
 
-    @Query(value = "SELECT * FROM cities ORDER BY 'name' ASC LIMIT 30;",
-            nativeQuery = true)
-        public List<Cities> biggestSequence();
+    @Query(value = "SELECT * FROM cities ORDER BY 'name' ASC LIMIT 30", nativeQuery = true)
+    public List<Cities> biggestSequence();
 }
